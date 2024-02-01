@@ -1,0 +1,96 @@
+{% extends "base.html" %} {% block title %} Home Page {% endblock title %} {%
+block body %}
+<section id="contact" class="contact">
+  {% include "messages.html" %}
+  <div class="container" data-aos="fade-up">
+    <div class="section-title">
+      <h2>Our Posts</h2>
+    </div>
+
+    <div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <img class="img-fluid" src="{{ url_for('static',filename='uploads/' + blog[0].image) }}" alt="">
+                <div>
+                <button type="button" class="btn btn-primary m-2 " data-toggle="modal" data-target="#comModal">
+                    Add comment
+                  </button>
+                <hr>
+                <h3>Comments</h3>
+                <hr>
+                  {% for com in comments %}
+                    <div class="media mt-4">
+                        <div class="media-body">
+                            <h5 class="m-0">{{ com.name }}</h5>
+                            <small>{{ com.date }}</small>
+                            <p class = 'mt-2'>{{ com.comment }} </p>
+                            <hr>
+                        </div>
+                    </div>
+                  {% endfor %}
+                  
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h2>{{ blog[0].title }}</h2>
+                <hr>
+                <p>Author : {{blog[0].author}}</p>
+                <p>Posted At : {{blog[0].date}}</p>
+                <hr>
+                <p>{{ blog[0].description }}</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <form action='/comment/{{blog[0].bid}}' method = 'POST'>
+        <div class="modal fade" id="comModal" tabindex="-1" aria-labelledby="comModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="comModalLabel">New comment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                <div class="form-group">
+                    <label for="email" class="col-form-label">name:</label>
+                    <input name='name' type="text" class="form-control" id="email">
+                </div>
+                <div class="form-group">
+                    <label for="com-content" class="col-form-label">comment:</label>
+                    <textarea name = 'comment' class="form-control" id="com-content"></textarea>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save Comment</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </form>
+
+
+    <script src=https://code.jquery.com/jquery-3.3.1.slim.min.js></script>
+    <script src=https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js></script>
+
+
+
+
+
+    </div>
+
+  </div>
+</section>
+<!-- End Contact Section -->
+
+{% endblock body %}
+
+
